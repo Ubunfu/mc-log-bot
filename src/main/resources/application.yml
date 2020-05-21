@@ -1,0 +1,6 @@
+feign:
+  hystrix:
+    enabled: false
+webhooks:
+  discord:
+    uri:
