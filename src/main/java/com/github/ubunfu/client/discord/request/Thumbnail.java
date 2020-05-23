@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class DiscordWebhookRequest {
+public class Thumbnail {
 
     @JsonProperty
-    private Embed[] embeds;
+    private String url;
 }
-
