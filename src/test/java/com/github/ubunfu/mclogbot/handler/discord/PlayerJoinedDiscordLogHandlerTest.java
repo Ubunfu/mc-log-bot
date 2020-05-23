@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.ubunfu.mclogbot.discord.DiscordClient;
 import com.github.ubunfu.mclogbot.discord.request.DiscordWebhookRequest;
 import com.github.ubunfu.mclogbot.discord.request.Field;
-import com.github.ubunfu.mclogbot.properties.PlayerJoinedTileProperties;
+import com.github.ubunfu.mclogbot.config.properties.PlayerJoinedTileProperties;
 import com.github.ubunfu.mclogbot.parser.ParserResponse;
 import com.github.ubunfu.mclogbot.parser.PlayerJoinedLogParser;
 import org.junit.jupiter.api.BeforeEach;

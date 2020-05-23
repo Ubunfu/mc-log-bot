@@ -1,4 +1,4 @@
-package com.github.ubunfu.mclogbot.properties;
+package com.github.ubunfu.mclogbot.config.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
