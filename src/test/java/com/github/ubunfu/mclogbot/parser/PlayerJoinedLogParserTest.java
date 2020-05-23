@@ -8,26 +8,25 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.*;
 
 public class PlayerJoinedLogParserTest {
 
     private static final String PLAYER = "PLAYER_001";
     private static final String LOG_VALID = "[23:35:23] [Server thread/INFO]: " + PLAYER + " joined the game";
-    private Set<Field> fields;
+    private Field field;
 
     private PlayerJoinedLogParser logParser;
 
     @BeforeEach
     void setUp() {
         logParser = new PlayerJoinedLogParser();
-        fields = new HashSet<>();
-        fields.add(new Field("Player", PLAYER));
+        field = new Field("Player", PLAYER);
     }
 
     @Test
     void whenValidLogExpectValidParserResponse() {
         ParserResponse parserResponse = logParser.parse(LOG_VALID);
-        assertThat(parserResponse.getFields(), containsInAnyOrder(fields));
+        assertThat(parserResponse.getFields(), containsInAnyOrder(equalTo(field)));
     }
 }
