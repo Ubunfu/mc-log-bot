@@ -3,7 +3,7 @@ package com.github.ubunfu.handler.discord;
 import com.github.ubunfu.client.discord.DiscordClient;
 import com.github.ubunfu.client.discord.request.DiscordWebhookRequest;
 import com.github.ubunfu.client.discord.request.DiscordWebhookRequestBuilder;
-import com.github.ubunfu.client.discord.request.Field;
+import com.github.ubunfu.config.properties.PlayerJoinedTileProperties;
 import com.github.ubunfu.parser.LogParser;
 import com.github.ubunfu.parser.ParserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,15 @@ import java.util.Date;
 public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
 
     private static final String KEY_EXPRESSION = "joined the game";
+    private final PlayerJoinedTileProperties playerJoinedTileProperties;
 
     @Autowired
     public PlayerJoinedDiscordLogHandler(
             DiscordClient discordClient,
-            LogParser logParser) {
+            LogParser logParser,
+            PlayerJoinedTileProperties playerJoinedTileProperties) {
         super(discordClient, logParser);
+        this.playerJoinedTileProperties = playerJoinedTileProperties;
     }
 
     @Override
@@ -36,12 +39,12 @@ public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
     private DiscordWebhookRequest buildDiscordRequest(String logMessage) {
         ParserResponse parserResponse = logParser.parse(logMessage);
         return DiscordWebhookRequestBuilder.create()
-                .author(parserResponse.getAttributes().get("author"))
-                .thumbnailUrl(parserResponse.getAttributes().get("thumbnail"))
-                .title(parserResponse.getAttributes().get("title"))
-                .color(Long.parseLong(parserResponse.getAttributes().get("color")))
+                .author(playerJoinedTileProperties.getAuthor())
+                .thumbnailUrl(playerJoinedTileProperties.getThumbnailUrl())
+                .title(playerJoinedTileProperties.getTitle())
+                .color(playerJoinedTileProperties.getColor())
                 .fields(parserResponse.getFields())
-                .timestamp(parserResponse.getAttributes().get("timestamp"))
+                .timestamp(new Date())
                 .build();
     }
 }

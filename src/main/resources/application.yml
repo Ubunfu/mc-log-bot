@@ -4,3 +4,9 @@ feign:
 webhooks:
   discord:
     uri:
+tile:
+  playerJoined:
+    author: "Conceierge Bot"
+    title: "Player left the server!"
+    thumbnailUrl: "https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png"
+    color: 65280

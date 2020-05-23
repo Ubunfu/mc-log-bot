@@ -2,7 +2,9 @@ package com.github.ubunfu.client.discord.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.format.datetime.DateFormatter;
 
+import java.util.Date;
 import java.util.Set;
 
 public class DiscordWebhookRequestBuilder {
@@ -48,8 +50,8 @@ public class DiscordWebhookRequestBuilder {
         return this;
     }
 
-    public DiscordWebhookRequestBuilder timestamp(String timestamp) {
-        discordWebhookRequest.getEmbeds()[0].setTimestamp(timestamp);
+    public DiscordWebhookRequestBuilder timestamp(Date timestamp) {
+        discordWebhookRequest.getEmbeds()[0].setTimestamp(timestamp.toString());
         return this;
     }
 

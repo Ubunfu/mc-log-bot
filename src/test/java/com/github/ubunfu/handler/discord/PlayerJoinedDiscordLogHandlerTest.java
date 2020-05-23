@@ -5,24 +5,22 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.ubunfu.client.discord.DiscordClient;
 import com.github.ubunfu.client.discord.request.DiscordWebhookRequest;
 import com.github.ubunfu.client.discord.request.Field;
+import com.github.ubunfu.config.properties.PlayerJoinedTileProperties;
 import com.github.ubunfu.parser.ParserResponse;
 import com.github.ubunfu.parser.PlayerJoinedLogParser;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,23 +30,47 @@ public class PlayerJoinedDiscordLogHandlerTest {
 
     private static final String LOG_PLAYER_JOINED = "[23:35:23] [Server thread/INFO]: PLAYER001 joined the game";
     private static final String LOG_PLAYER_LEFT = "[23:35:23] [Server thread/INFO]: PLAYER001 left the game";
-    private static final String REQ_JSON_PLAYER_JOINED = "{\"embeds\":[{\"author\":{\"name\":\"AUTHOR_001\"},\"thumbnail\":{\"url\":\"THUMBNAIL_001\"},\"title\":\"TITLE_001\",\"color\":1,\"fields\":[{\"name\":\"FIELD_NAME\",\"value\":\"FIELD_VALUE\"}],\"timestamp\":\"TIMESTAMP_001\"}]}";
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String AUTHOR = "AUTHOR_001";
-    private static final String THUMBNAIL = "THUMBNAIL_001";
+    private static final String THUMBNAIL_URL = "THUMBNAIL_001";
     private static final String TITLE = "TITLE_001";
     private static final long COLOR = 1;
-    private static final String FIELD_1_NAME = "FIELD_NAME";
-    private static final String FIELD_1_VALUE = "FIELD_VALUE";
+    private static final String FIELD_1_NAME = "FIELD_NAME_001";
+    private static final String FIELD_1_VALUE = "FIELD_VALUE_001";
     private static final Field FIELD_1 = new Field(FIELD_1_NAME, FIELD_1_VALUE);
-    private static final String TIMESTAMP = "TIMESTAMP_001";
+    private static final String TIMESTAMP = new Date().toString();
     private static final ParserResponse PARSER_RESPONSE = buildParserResponse();
+    private static final String REQ_JSON_PLAYER_JOINED = "" +
+            "{\n" +
+            "    \"embeds\": [\n" +
+            "        {\n" +
+            "            \"author\": {\n" +
+            "                \"name\": \"" + AUTHOR + "\"\n" +
+            "            },\n" +
+            "            \"thumbnail\": {\n" +
+            "                \"url\": \"" + THUMBNAIL_URL + "\"\n" +
+            "            },\n" +
+            "            \"title\": \"" + TITLE + "\",\n" +
+            "            \"color\": " + COLOR + ",\n" +
+            "            \"fields\": [\n" +
+            "               {\n" +
+            "                   \"name\": \"" + FIELD_1_NAME + "\",\n" +
+            "                   \"value\": \"" + FIELD_1_VALUE + "\"\n" +
+            "               }\n" +
+            "            ],\n" +
+            "            \"timestamp\": \"" + TIMESTAMP + "\"\n" +
+            "        }\n" +
+            "    ]\n" +
+            "}";
 
     private PlayerJoinedDiscordLogHandler logHandler;
 
     private DiscordWebhookRequest discordWebhookRequest;
 
     private ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor = ArgumentCaptor.forClass(DiscordWebhookRequest.class);
+
+    @Mock
+    private PlayerJoinedTileProperties properties;
 
     @Mock
     private PlayerJoinedLogParser logParser;
@@ -58,18 +80,8 @@ public class PlayerJoinedDiscordLogHandlerTest {
 
     @BeforeEach
     void setUp() throws JsonProcessingException {
-        logHandler = new PlayerJoinedDiscordLogHandler(discordClient, logParser);
+        logHandler = new PlayerJoinedDiscordLogHandler(discordClient, logParser, properties);
         discordWebhookRequest = buildDiscordWebhookRequest();
-    }
-
-    private static Map<String, String> buildParsedAtrributes() {
-        Map<String, String> map = new HashMap<>();
-        map.put("author", AUTHOR);
-        map.put("thumbnail", THUMBNAIL);
-        map.put("title", TITLE);
-        map.put("color", String.valueOf(COLOR));
-        map.put("timestamp", TIMESTAMP);
-        return map;
     }
 
     private static Set<Field> buildParsedLogFields() {
@@ -79,7 +91,7 @@ public class PlayerJoinedDiscordLogHandlerTest {
     }
 
     private static ParserResponse buildParserResponse() {
-        return new ParserResponse(buildParsedAtrributes(), buildParsedLogFields());
+        return new ParserResponse(buildParsedLogFields());
     }
 
     private DiscordWebhookRequest buildDiscordWebhookRequest() throws JsonProcessingException {
@@ -97,10 +109,28 @@ public class PlayerJoinedDiscordLogHandlerTest {
     }
 
     @Test
-    void whenHandleLogExpectCallDiscord() {
+    void whenHandleLogExpectParseLogAndCallDiscord() {
+        configureMockProperties();
         when(logParser.parse(anyString())).thenReturn(PARSER_RESPONSE);
         logHandler.handle(LOG_PLAYER_JOINED);
+        verify(logParser).parse(LOG_PLAYER_JOINED);
         verify(discordClient).invokeWebhook(discordReqCaptor.capture());
-        assertThat(discordReqCaptor.getValue(), equalTo(discordWebhookRequest));
+        verifyDiscordRequest(discordReqCaptor);
+    }
+
+    private void configureMockProperties() {
+        when(properties.getAuthor()).thenReturn(AUTHOR);
+        when(properties.getThumbnailUrl()).thenReturn(THUMBNAIL_URL);
+        when(properties.getTitle()).thenReturn(TITLE);
+        when(properties.getColor()).thenReturn(COLOR);
+    }
+
+    private void verifyDiscordRequest(ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor) {
+        assertThat(discordReqCaptor.getValue().getEmbeds()[0].getAuthor().getName(), equalTo(AUTHOR));
+        assertThat(discordReqCaptor.getValue().getEmbeds()[0].getThumbnail().getUrl(), equalTo(THUMBNAIL_URL));
+        assertThat(discordReqCaptor.getValue().getEmbeds()[0].getTitle(), equalTo(TITLE));
+        assertThat(discordReqCaptor.getValue().getEmbeds()[0].getColor(), equalTo(COLOR));
+        assertThat(discordReqCaptor.getValue().getEmbeds()[0].getFields(), hasSize(1));
+        assertThat(discordReqCaptor.getValue().getEmbeds()[0].getFields(), contains(FIELD_1));
     }
 }

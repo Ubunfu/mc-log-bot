@@ -8,6 +8,9 @@ public abstract class AbstractDiscordLogHandler implements LogHandler {
 
     protected DiscordClient discordClient;
     protected LogParser logParser;
+    protected String author;
+    protected String title;
+    protected long color;
 
     public AbstractDiscordLogHandler(
             DiscordClient discordClient,
