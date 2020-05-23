@@ -1,6 +1,5 @@
 package com.github.ubunfu.mclogbot;
 
-import com.github.ubunfu.mclogbot.LogScrapingTailerListenerAdapter;
 import org.apache.commons.io.input.Tailer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

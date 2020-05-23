@@ -2,18 +2,21 @@ package com.github.ubunfu.mclogbot;
 
 import com.github.ubunfu.mclogbot.service.LogScraperService;
 import org.apache.commons.io.input.TailerListenerAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LogScrapingTailerListenerAdapter extends TailerListenerAdapter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogScrapingTailerListenerAdapter.class);
+    private LogScraperService logScraperService;
 
     @Autowired
-    LogScraperService logScraperService;
+    public LogScrapingTailerListenerAdapter(LogScraperService logScraperService) {
+        this.logScraperService = logScraperService;
+    }
 
     @Override
     public void handle(String line) {
+        logScraperService.handleLog(line);
     }
 }
