@@ -6,13 +6,20 @@ import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequestBu
 import com.github.ubunfu.mclogbot.config.properties.PlayerJoinedBotProperties;
 import com.github.ubunfu.mclogbot.parser.LogParser;
 import com.github.ubunfu.mclogbot.parser.ParserResponse;
+import com.netflix.config.sources.URLConfigurationSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
 
+import static java.lang.String.format;
+
 @Component
 public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerJoinedDiscordLogHandler.class);
 
     private static final String KEY_EXPRESSION = "joined the game";
     private final PlayerJoinedBotProperties playerJoinedBotProperties;
@@ -28,17 +35,21 @@ public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
 
     @Override
     public boolean isMatch(String logMessage) {
+        LOGGER.debug(format("Testing log handling capability of LogHandler: %s ... %b",
+                PlayerJoinedDiscordLogHandler.class.getCanonicalName(), logMessage.contains(KEY_EXPRESSION)));
         return logMessage.contains(KEY_EXPRESSION);
     }
 
     @Override
     public void handle(String logMessage) {
+        LOGGER.debug(format("Handler %s handling log message: %s ...",
+                PlayerJoinedDiscordLogHandler.class.getCanonicalName(), logMessage));
         discordClient.invokeWebhook(buildDiscordRequest(logMessage));
     }
 
     private DiscordWebhookRequest buildDiscordRequest(String logMessage) {
         ParserResponse parserResponse = logParser.parse(logMessage);
-        return DiscordWebhookRequestBuilder.create()
+        DiscordWebhookRequest request = DiscordWebhookRequestBuilder.create()
                 .author(playerJoinedBotProperties.getAuthor())
                 .thumbnailUrl(playerJoinedBotProperties.getThumbnailUrl())
                 .title(playerJoinedBotProperties.getTitle())
@@ -46,5 +57,8 @@ public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
                 .fields(parserResponse.getFields())
                 .timestamp(ZonedDateTime.now())
                 .build();
+        LOGGER.debug(format("Built %s: %s",
+                request.getClass().getCanonicalName(), request.toString()));
+        return request;
     }
 }

@@ -1,0 +1,5 @@
+tailer:
+  logFile: "/Users/ryanallen/Development/java/mc-log-bot/test.log"
+logging:
+  level:
+    com.github.ubunfu.mclogbot: DEBUG
