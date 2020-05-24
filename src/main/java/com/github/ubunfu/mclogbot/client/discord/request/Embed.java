@@ -1,4 +1,4 @@
-package com.github.ubunfu.mclogbot.discord.request;
+package com.github.ubunfu.mclogbot.client.discord.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

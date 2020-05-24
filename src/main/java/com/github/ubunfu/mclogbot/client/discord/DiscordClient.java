@@ -1,7 +1,7 @@
-package com.github.ubunfu.mclogbot.discord;
+package com.github.ubunfu.mclogbot.client.discord;
 
-import com.github.ubunfu.mclogbot.discord.request.DiscordWebhookRequest;
-import com.github.ubunfu.mclogbot.discord.response.DiscordWebhookResponse;
+import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequest;
+import com.github.ubunfu.mclogbot.client.discord.response.DiscordWebhookResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

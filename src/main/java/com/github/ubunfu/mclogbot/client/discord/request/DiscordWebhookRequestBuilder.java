@@ -1,4 +1,4 @@
-package com.github.ubunfu.mclogbot.discord.request;
+package com.github.ubunfu.mclogbot.client.discord.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

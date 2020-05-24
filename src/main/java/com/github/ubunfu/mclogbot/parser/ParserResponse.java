@@ -1,6 +1,6 @@
 package com.github.ubunfu.mclogbot.parser;
 
-import com.github.ubunfu.mclogbot.discord.request.Field;
+import com.github.ubunfu.mclogbot.client.discord.request.Field;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

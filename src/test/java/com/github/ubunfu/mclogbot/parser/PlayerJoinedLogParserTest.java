@@ -1,14 +1,12 @@
 package com.github.ubunfu.mclogbot.parser;
 
-import com.github.ubunfu.mclogbot.discord.request.Field;
+import com.github.ubunfu.mclogbot.client.discord.request.Field;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
 
 public class PlayerJoinedLogParserTest {
 
