@@ -2,10 +2,12 @@ package com.github.ubunfu.mclogbot.service;
 
 import com.github.ubunfu.mclogbot.handler.LogHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class LogScraperService {
 
     private final Set<LogHandler> logHandlers;

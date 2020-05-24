@@ -9,7 +9,7 @@ import com.github.ubunfu.mclogbot.parser.ParserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 @Component
 public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
@@ -44,7 +44,7 @@ public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
                 .title(playerJoinedTileProperties.getTitle())
                 .color(playerJoinedTileProperties.getColor())
                 .fields(parserResponse.getFields())
-                .timestamp(new Date())
+                .timestamp(ZonedDateTime.now())
                 .build();
     }
 }

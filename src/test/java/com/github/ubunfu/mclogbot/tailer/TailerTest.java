@@ -1,4 +1,4 @@
-package com.github.ubunfu.mclogbot;
+package com.github.ubunfu.mclogbot.tailer;
 
 import org.apache.commons.io.input.Tailer;
 import org.junit.jupiter.api.AfterEach;

@@ -15,6 +15,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -132,5 +133,11 @@ public class PlayerJoinedDiscordLogHandlerTest {
         assertThat(discordReqCaptor.getValue().getEmbeds()[0].getColor(), equalTo(COLOR));
         assertThat(discordReqCaptor.getValue().getEmbeds()[0].getFields(), hasSize(1));
         assertThat(discordReqCaptor.getValue().getEmbeds()[0].getFields(), contains(FIELD_1));
+        verifyTimestampFormat(discordReqCaptor);
+    }
+
+    private void verifyTimestampFormat(ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor) {
+        String timestampString = discordReqCaptor.getValue().getEmbeds()[0].getTimestamp();
+        ZonedDateTime.parse(timestampString);
     }
 }

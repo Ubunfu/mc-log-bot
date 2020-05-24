@@ -2,7 +2,7 @@ package com.github.ubunfu.mclogbot.client.discord.request;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public class DiscordWebookRequestBuilderTest {
     private static final String ANY_STRING = "STRING";
     private static final long ANY_LONG = 1;
     private static final Set<Field> ANY_FIELD_SET = new HashSet<>();
-    private static final Date ANY_DATE = new Date();
+    private static final ZonedDateTime ANY_DATE = ZonedDateTime.now();
 
     @Test
     void expectBuilderAlwaysReturnsBuilder() {

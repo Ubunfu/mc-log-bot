@@ -3,7 +3,7 @@ package com.github.ubunfu.mclogbot.client.discord.request;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Date;
+import java.time.ZonedDateTime;
 import java.util.Set;
 
 public class DiscordWebhookRequestBuilder {
@@ -49,8 +49,8 @@ public class DiscordWebhookRequestBuilder {
         return this;
     }
 
-    public DiscordWebhookRequestBuilder timestamp(Date timestamp) {
-        discordWebhookRequest.getEmbeds()[0].setTimestamp(timestamp.toString());
+    public DiscordWebhookRequestBuilder timestamp(ZonedDateTime localDateTime) {
+        discordWebhookRequest.getEmbeds()[0].setTimestamp(localDateTime.toString());
         return this;
     }
 

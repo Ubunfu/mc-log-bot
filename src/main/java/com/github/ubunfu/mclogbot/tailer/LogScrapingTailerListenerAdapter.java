@@ -1,4 +1,4 @@
-package com.github.ubunfu.mclogbot;
+package com.github.ubunfu.mclogbot.tailer;
 
 import com.github.ubunfu.mclogbot.service.LogScraperService;
 import org.apache.commons.io.input.TailerListenerAdapter;
