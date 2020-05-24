@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Data
 @Configuration
-@ConfigurationProperties(prefix = "tile.player-joined")
-public class PlayerJoinedTileProperties {
+@ConfigurationProperties(prefix = "tailer")
+public class TailerProperties {
 
-    private String author;
-    private String title;
-    private String thumbnailUrl;
-    private long color;
+    private String logFile;
+    private long readDelayMillis;
+    private boolean readFromEnd;
+    private boolean closeFileBetweenChunks;
 }

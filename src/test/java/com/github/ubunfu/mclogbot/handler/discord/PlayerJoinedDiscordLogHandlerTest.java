@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.ubunfu.mclogbot.client.discord.DiscordClient;
 import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequest;
 import com.github.ubunfu.mclogbot.client.discord.request.Field;
-import com.github.ubunfu.mclogbot.config.properties.PlayerJoinedTileProperties;
+import com.github.ubunfu.mclogbot.config.properties.PlayerJoinedBotProperties;
 import com.github.ubunfu.mclogbot.parser.ParserResponse;
 import com.github.ubunfu.mclogbot.parser.PlayerJoinedLogParser;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,7 +71,7 @@ public class PlayerJoinedDiscordLogHandlerTest {
     private ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor = ArgumentCaptor.forClass(DiscordWebhookRequest.class);
 
     @Mock
-    private PlayerJoinedTileProperties properties;
+    private PlayerJoinedBotProperties properties;
 
     @Mock
     private PlayerJoinedLogParser logParser;

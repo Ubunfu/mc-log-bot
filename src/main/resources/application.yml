@@ -1,12 +1,16 @@
 feign:
   hystrix:
     enabled: false
-webhooks:
+apps:
   discord:
-    host: "https://discordapp.com"
-    uri: "/api/webhooks/704810377099345930/QZbel_JmuCOFVu0HiHJTloaHxb1nqM7v4USGk4Vy_0NXW7crrGwElF410vekqjk2zUWl"
-
-tile:
+    hookHost: "https://discordapp.com"
+    hookUri: "/api/webhooks/704810377099345930/QZbel_JmuCOFVu0HiHJTloaHxb1nqM7v4USGk4Vy_0NXW7crrGwElF410vekqjk2zUWl"
+tailer:
+  logFile: "server.log"
+  readDelayMillis: 1000
+  readFromEnd: true
+  closeFileBetweenChunks: true
+bot:
   player-joined:
     author: "Conceierge Bot"
     title: "Player left the server!"
