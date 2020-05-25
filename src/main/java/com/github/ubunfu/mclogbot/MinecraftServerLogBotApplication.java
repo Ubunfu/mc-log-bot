@@ -1,4 +1,4 @@
-package com.github.ubunfu;
+package com.github.ubunfu.mclogbot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
