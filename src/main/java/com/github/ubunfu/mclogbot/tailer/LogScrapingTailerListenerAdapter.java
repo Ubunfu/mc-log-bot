@@ -26,7 +26,7 @@ public class LogScrapingTailerListenerAdapter extends TailerListenerAdapter {
 
     @Override
     public void init(Tailer tailer) {
-        LOGGER.debug("Initialized the Tailer....");
+        LOGGER.debug("Initialized the Tailer.");
     }
 
     @Override

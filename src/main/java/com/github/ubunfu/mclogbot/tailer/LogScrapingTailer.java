@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 
 @Component
@@ -25,8 +26,13 @@ public class LogScrapingTailer extends Tailer {
                 tailerProperties.isReadFromEnd(),
                 tailerProperties.isCloseFileBetweenChunks()
         );
-        LOGGER.debug("Constructed Tailer.  Running now ...");
+        LOGGER.debug("Constructed Tailer.");
+    }
+
+    @PostConstruct
+    private void runTailer() {
+        LOGGER.debug("PostConstruct: Running Tailer now ...");
         this.run();
-        LOGGER.debug("Started tailer.");
+        LOGGER.debug("Control exited from run().");
     }
 }
