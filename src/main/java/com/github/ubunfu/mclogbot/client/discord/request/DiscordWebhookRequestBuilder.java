@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 public class DiscordWebhookRequestBuilder {
@@ -11,6 +12,7 @@ public class DiscordWebhookRequestBuilder {
     private DiscordWebhookRequest discordWebhookRequest;
     private ObjectMapper mapper = new ObjectMapper();
     private static final String BASE_REQ_JSON = "{\"embeds\":[{\"author\":{\"name\":\"\"},\"thumbnail\":{\"url\":\"\"},\"title\":\"\",\"color\":0,\"fields\":[],\"timestamp\":\"\"}]}";
+    private static final DateTimeFormatter DISCORD_DATE_TIME_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
     public DiscordWebhookRequestBuilder() {
         try {
@@ -50,7 +52,7 @@ public class DiscordWebhookRequestBuilder {
     }
 
     public DiscordWebhookRequestBuilder timestamp(ZonedDateTime localDateTime) {
-        discordWebhookRequest.getEmbeds()[0].setTimestamp(localDateTime.toString());
+        discordWebhookRequest.getEmbeds()[0].setTimestamp(localDateTime.format(DISCORD_DATE_TIME_FORMATTER));
         return this;
     }
 

@@ -1,5 +1,7 @@
 tailer:
   logFile: "/Users/ryanallen/Development/java/mc-log-bot/test.log"
-logging:
-  level:
-    com.github.ubunfu.mclogbot: DEBUG
+#logging:
+#  level:
+#    com.github.ubunfu.mclogbot: DEBUG
+#    org.springframework.cloud.openfeign: DEBUG
+#    io.github.openfeign: DEBUG

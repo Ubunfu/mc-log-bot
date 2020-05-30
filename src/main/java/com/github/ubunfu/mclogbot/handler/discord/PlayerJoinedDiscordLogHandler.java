@@ -6,7 +6,7 @@ import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequestBu
 import com.github.ubunfu.mclogbot.config.properties.PlayerJoinedBotProperties;
 import com.github.ubunfu.mclogbot.parser.LogParser;
 import com.github.ubunfu.mclogbot.parser.ParserResponse;
-import com.netflix.config.sources.URLConfigurationSource;
+import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +44,13 @@ public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
     public void handle(String logMessage) {
         LOGGER.debug(format("Handler %s handling log message: %s ...",
                 PlayerJoinedDiscordLogHandler.class.getCanonicalName(), logMessage));
-        discordClient.invokeWebhook(buildDiscordRequest(logMessage));
+        Response response = discordClient.invokeWebhook(buildDiscordRequest(logMessage));
+        LOGGER.info(format("Discord response: %s", response.status()));
     }
 
     private DiscordWebhookRequest buildDiscordRequest(String logMessage) {
         ParserResponse parserResponse = logParser.parse(logMessage);
+        LOGGER.debug(format("Parsed log message into: %s", parserResponse.toString()));
         DiscordWebhookRequest request = DiscordWebhookRequestBuilder.create()
                 .author(playerJoinedBotProperties.getAuthor())
                 .thumbnailUrl(playerJoinedBotProperties.getThumbnailUrl())
