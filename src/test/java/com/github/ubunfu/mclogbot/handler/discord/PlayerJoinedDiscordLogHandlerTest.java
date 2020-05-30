@@ -1,13 +1,13 @@
 package com.github.ubunfu.mclogbot.handler.discord;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.ubunfu.mclogbot.client.discord.DiscordClient;
 import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequest;
 import com.github.ubunfu.mclogbot.client.discord.request.Field;
 import com.github.ubunfu.mclogbot.config.properties.PlayerJoinedBotProperties;
 import com.github.ubunfu.mclogbot.parser.ParserResponse;
 import com.github.ubunfu.mclogbot.parser.PlayerJoinedLogParser;
+import feign.Request;
+import feign.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,12 +16,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +32,6 @@ public class PlayerJoinedDiscordLogHandlerTest {
 
     private static final String LOG_PLAYER_JOINED = "[23:35:23] [Server thread/INFO]: PLAYER001 joined the game";
     private static final String LOG_PLAYER_LEFT = "[23:35:23] [Server thread/INFO]: PLAYER001 left the game";
-    private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String AUTHOR = "AUTHOR_001";
     private static final String THUMBNAIL_URL = "THUMBNAIL_001";
     private static final String TITLE = "TITLE_001";
@@ -39,35 +39,10 @@ public class PlayerJoinedDiscordLogHandlerTest {
     private static final String FIELD_1_NAME = "FIELD_NAME_001";
     private static final String FIELD_1_VALUE = "FIELD_VALUE_001";
     private static final Field FIELD_1 = new Field(FIELD_1_NAME, FIELD_1_VALUE);
-    private static final String TIMESTAMP = new Date().toString();
     private static final ParserResponse PARSER_RESPONSE = buildParserResponse();
-    private static final String REQ_JSON_PLAYER_JOINED = "" +
-            "{\n" +
-            "    \"embeds\": [\n" +
-            "        {\n" +
-            "            \"author\": {\n" +
-            "                \"name\": \"" + AUTHOR + "\"\n" +
-            "            },\n" +
-            "            \"thumbnail\": {\n" +
-            "                \"url\": \"" + THUMBNAIL_URL + "\"\n" +
-            "            },\n" +
-            "            \"title\": \"" + TITLE + "\",\n" +
-            "            \"color\": " + COLOR + ",\n" +
-            "            \"fields\": [\n" +
-            "               {\n" +
-            "                   \"name\": \"" + FIELD_1_NAME + "\",\n" +
-            "                   \"value\": \"" + FIELD_1_VALUE + "\"\n" +
-            "               }\n" +
-            "            ],\n" +
-            "            \"timestamp\": \"" + TIMESTAMP + "\"\n" +
-            "        }\n" +
-            "    ]\n" +
-            "}";
+    private static final Response FEIGN_RESPONSE = buildFeignResponse();
 
     private PlayerJoinedDiscordLogHandler logHandler;
-
-    private DiscordWebhookRequest discordWebhookRequest;
-
     private ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor = ArgumentCaptor.forClass(DiscordWebhookRequest.class);
 
     @Mock
@@ -80,9 +55,23 @@ public class PlayerJoinedDiscordLogHandlerTest {
     private DiscordClient discordClient;
 
     @BeforeEach
-    void setUp() throws JsonProcessingException {
+    void setUp() {
         logHandler = new PlayerJoinedDiscordLogHandler(discordClient, logParser, properties);
-        discordWebhookRequest = buildDiscordWebhookRequest();
+    }
+
+    private static Response buildFeignResponse() {
+        return Response.builder()
+                .request(buildFeignRequest())
+                .build();
+    }
+
+    private static Request buildFeignRequest() {
+        return Request.create(
+                Request.HttpMethod.POST,
+                "http://localhost",
+                new HashMap<>(),
+                Request.Body.empty(),
+                null);
     }
 
     private static Set<Field> buildParsedLogFields() {
@@ -93,10 +82,6 @@ public class PlayerJoinedDiscordLogHandlerTest {
 
     private static ParserResponse buildParserResponse() {
         return new ParserResponse(buildParsedLogFields());
-    }
-
-    private DiscordWebhookRequest buildDiscordWebhookRequest() throws JsonProcessingException {
-        return MAPPER.readValue(REQ_JSON_PLAYER_JOINED, DiscordWebhookRequest.class);
     }
 
     @Test
@@ -111,6 +96,8 @@ public class PlayerJoinedDiscordLogHandlerTest {
 
     @Test
     void whenHandleLogExpectParseLogAndCallDiscord() {
+        when(discordClient.invokeWebhook(any()))
+                .thenReturn(FEIGN_RESPONSE);
         configureMockProperties();
         when(logParser.parse(anyString())).thenReturn(PARSER_RESPONSE);
         logHandler.handle(LOG_PLAYER_JOINED);

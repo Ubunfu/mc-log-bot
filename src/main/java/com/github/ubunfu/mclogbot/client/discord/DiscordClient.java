@@ -1,7 +1,7 @@
 package com.github.ubunfu.mclogbot.client.discord;
 
 import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequest;
-import com.github.ubunfu.mclogbot.client.discord.response.DiscordWebhookResponse;
+import feign.Response;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,5 +14,5 @@ public interface DiscordClient {
             path = "${apps.discord.hookUri}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = {MediaType.APPLICATION_JSON_VALUE})
-    DiscordWebhookResponse invokeWebhook(@RequestBody DiscordWebhookRequest request);
+    Response invokeWebhook(@RequestBody DiscordWebhookRequest request);
 }

@@ -3,3 +3,5 @@ tailer:
 logging:
   level:
     com.github.ubunfu.mclogbot: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
+    io.github.openfeign: DEBUG

@@ -6,8 +6,8 @@ apps:
     hookHost: "https://discordapp.com"
     hookUri: "/api/webhooks/704810377099345930/QZbel_JmuCOFVu0HiHJTloaHxb1nqM7v4USGk4Vy_0NXW7crrGwElF410vekqjk2zUWl"
 tailer:
-  enabled: true
-  logFile: "server.log"
+  enabled: false
+  logFile: "/Users/ryanallen/Development/java/mc-log-bot/test.log"
   readDelayMillis: 1000
   readFromEnd: true
   closeFileBetweenChunks: true
