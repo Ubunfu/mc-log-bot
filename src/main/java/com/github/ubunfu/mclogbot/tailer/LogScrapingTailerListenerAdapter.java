@@ -1,5 +1,6 @@
 package com.github.ubunfu.mclogbot.tailer;
 
+import com.github.ubunfu.mclogbot.config.properties.TailerProperties;
 import com.github.ubunfu.mclogbot.service.LogScraperService;
 import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
@@ -18,10 +19,14 @@ public class LogScrapingTailerListenerAdapter extends TailerListenerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogScrapingTailerListenerAdapter.class);
 
     private LogScraperService logScraperService;
+    private TailerProperties tailerProperties;
 
     @Autowired
-    public LogScrapingTailerListenerAdapter(LogScraperService logScraperService) {
+    public LogScrapingTailerListenerAdapter(
+            LogScraperService logScraperService,
+            TailerProperties tailerProperties) {
         this.logScraperService = logScraperService;
+        this.tailerProperties = tailerProperties;
     }
 
     @Override
@@ -38,6 +43,7 @@ public class LogScrapingTailerListenerAdapter extends TailerListenerAdapter {
     @Override
     public void fileNotFound() {
         try {
+            LOGGER.error(format("Unable to locate file: %s", tailerProperties.getLogFile()));
             throw new FileNotFoundException();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

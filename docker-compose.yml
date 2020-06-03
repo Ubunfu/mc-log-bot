@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+
+  mc-server:
+    image: itzg/minecraft-server
+    ports:
+    - "25565:25565"
+    environment:
+      EULA: "TRUE"
+    volumes:
+    - "/path/to/server/data:/data"
+
+  mc-log-bot:
+    build: .
+    image: ubunfu/mc-log-bot
+    environment:
+      TAILER_LOGFILE: /data/logs/latest.log
+      TAILER_READ_DELAY_MILLIS: 1000
+      APPS_DISCORD_HOOK_URI: /api/webhooks/HOOK/PATH
+      BOT_PLAYER_JOINED_AUTHOR: Attendance Bot
+      BOT_PLAYER_JOINED_TITLE: Player joined the server
+      BOT_PLAYER_JOINED_THUMBNAIL_URL: https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png
+      BOT_PLAYER_JOINED_COLOR: 65280
+    volumes:
+    - "/path/to/server/data:/data"
