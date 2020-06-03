@@ -1,5 +1,6 @@
 package com.github.ubunfu.mclogbot.tailer;
 
+import com.github.ubunfu.mclogbot.config.properties.TailerProperties;
 import com.github.ubunfu.mclogbot.service.LogScraperService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +20,12 @@ public class LogScrapingTailerListenerAdapterTest {
     @Mock
     private LogScraperService logScraperService;
 
+    @Mock
+    private TailerProperties tailerProperties;
+
     @BeforeEach
     void setUp() {
-        listenerAdapter = new LogScrapingTailerListenerAdapter(logScraperService);
+        listenerAdapter = new LogScrapingTailerListenerAdapter(logScraperService, tailerProperties);
     }
 
     @Test
