@@ -30,11 +30,11 @@ docker pull ubunfu/mc-log-bot
 
 2. Run it alongside your Minecraft server
 ```bash
-docker run -e APPS_DISCORD_HOOK_URI=/path/of/discord/webhook -v /path/to/server/data:/data -d ubunfu/mc-log-bot
+docker run -e APPS_DISCORD_HOOKURI=/path/of/discord/webhook -v /path/to/server/data:/data -d ubunfu/mc-log-bot
 ```
 
 #### Parameters
-* `-e APPS_DISCORD_HOOK_URI=/path/of/discord/webhook`: Inject the URL path of a Discord webhook into the container
+* `-e APPS_DISCORD_HOOKURI=/path/of/discord/webhook`: Inject the URL path of a Discord webhook into the container
 * `-v /path/to/server/data:/data`: Mount the Minecraft server data directory to the container filesystem @ `/data`.  
     This will give the container access to the server log files. See "Setting up the data directory" for more details.
 * `-d`: Run the container in detached mode (not tied to current terminal session).  Use `docker logs <container-id>` to 
@@ -54,7 +54,7 @@ docker build -t mc-log-bot .
 
 3. Run the container alongside your minecraft server (see above for parameter descriptions)
 ```bash
-docker run -e APPS_DISCORD_HOOK_URI=/path/of/discord/webhook -v /path/to/server/data:/data -d ubunfu/mc-log-bot
+docker run -e APPS_DISCORD_HOOKURI=/path/of/discord/webhook -v /path/to/server/data:/data -d ubunfu/mc-log-bot
 ```
 
 ## Setting up the data directory
