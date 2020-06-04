@@ -4,7 +4,7 @@ feign:
 apps:
   discord:
     hookHost: "https://discordapp.com"
-    hookUri: "/api/webhooks/704810377099345930/QZbel_JmuCOFVu0HiHJTloaHxb1nqM7v4USGk4Vy_0NXW7crrGwElF410vekqjk2zUWl"
+    hookUri: "/api/webhooks/HOOK/PATH"
 tailer:
   enabled: true
   logFile: "server.log"
