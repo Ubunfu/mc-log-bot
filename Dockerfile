@@ -3,21 +3,14 @@ FROM maven:3-openjdk-11-slim
 WORKDIR /app
 COPY . /app
 
-RUN ["mvn", "clean", "package", "-DskipTests"]
-
 ENV TAILER_LOGFILE /data/logs/latest.log
-ENV TAILER_READ_DELAY_MILLIS 1000
-ENV APPS_DISCORD_HOOK_URI /api/webhooks/HOOK/PATH
+ENV TAILER_READDELAYMILLIS 1000
+ENV APPS_DISCORD_HOOKURI /api/webhooks/HOOK/PATH
 ENV BOT_PLAYER_JOINED_AUTHOR Attendance Bot
-ENV BOT_PLAYER_JOINED_TITLE Player joined the server
-ENV BOT_PLAYER_JOINED_THUMBNAIL_URL https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png
+ENV BOT_PLAYER_JOINED_TITLE Player joined the server!
+ENV BOT_PLAYER_JOINED_THUMBNAILURL https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png
 ENV BOT_PLAYER_JOINED_COLOR 65280
 
-ENTRYPOINT ["mvn", "spring-boot:run", \
-                "-DTAILER_LOGFILE=$TAILER_LOGFILE", \
-                "-DTAILER_READDELAYMILLIS=$TAILER_READ_DELAY_MILLIS", \
-                "-DAPPS_DISCORD_HOOKURI=$APPS_DISCORD_HOOK_URI", \
-                "-DBOT_PLAYER_JOINED_AUTHOR=$BOT_PLAYER_JOINED_AUTHOR", \
-                "-DBOT_PLAYER_JOINED_TITLE=$BOT_PLAYER_JOINED_TITLE", \
-                "-DBOT_PLAYER_JOINED_THUMBNAILURL=$BOT_PLAYER_JOINED_THUMBNAIL_URL", \
-                "-DBOT_PLAYER_JOINED_COLOR=$BOT_PLAYER_JOINED_COLOR"]
+RUN ["mvn", "clean", "package", "-DskipTests"]
+
+ENTRYPOINT ["mvn", "spring-boot:run"]
