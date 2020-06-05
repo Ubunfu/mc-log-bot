@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,13 +24,18 @@ public class LogScraperService {
         this.logHandlers = logHandlers;
     }
 
+    @PostConstruct
+    private void welcomeBots() {
+        logHandlers.forEach(logHandler -> LOGGER.info(logHandler.getWelcomeMessage()));
+    }
+
     public void handleLog(String logMessage) {
         getMatchingLogHandlers(logMessage)
         .forEach(logHandler -> logHandler.handle(logMessage));
     }
 
     private Set<LogHandler> getMatchingLogHandlers(String logMessage) {
-        LOGGER.debug(format("Searching for capable LogHandlers ..."));
+        LOGGER.debug("Searching for capable LogHandlers ...");
         return logHandlers.stream()
                 .filter(logHandler -> logHandler.isMatch(logMessage))
                 .collect(Collectors.toSet());

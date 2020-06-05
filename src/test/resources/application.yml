@@ -4,15 +4,16 @@ feign:
 apps:
   discord:
     hookHost: "https://discordapp.com"
-    hookUri: "/api/webhooks/704810377099345930/QZbel_JmuCOFVu0HiHJTloaHxb1nqM7v4USGk4Vy_0NXW7crrGwElF410vekqjk2zUWl"
+    hookUri: "/api/webhooks/HOOK/PATH"
 tailer:
   enabled: false
-  logFile: "/Users/ryanallen/Development/java/mc-log-bot/test.log"
+  logFile: "server.log"
   readDelayMillis: 1000
   readFromEnd: true
   closeFileBetweenChunks: true
 bot:
   player-joined:
+    enabled: true
     author: "Attendance Bot"
     title: "Player joined the server!"
     thumbnailUrl: "https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png"

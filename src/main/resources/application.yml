@@ -13,6 +13,7 @@ tailer:
   closeFileBetweenChunks: true
 bot:
   player-joined:
+    enabled: true
     author: "Attendance Bot"
     title: "Player joined the server!"
     thumbnailUrl: "https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png"

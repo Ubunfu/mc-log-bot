@@ -2,7 +2,6 @@ package com.github.ubunfu.mclogbot.tailer;
 
 import com.github.ubunfu.mclogbot.config.properties.TailerProperties;
 import com.github.ubunfu.mclogbot.service.LogScraperService;
-import org.apache.commons.io.input.Tailer;
 import org.apache.commons.io.input.TailerListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +26,6 @@ public class LogScrapingTailerListenerAdapter extends TailerListenerAdapter {
             TailerProperties tailerProperties) {
         this.logScraperService = logScraperService;
         this.tailerProperties = tailerProperties;
-    }
-
-    @Override
-    public void init(Tailer tailer) {
-        LOGGER.debug("Initialized the Tailer.");
     }
 
     @Override
