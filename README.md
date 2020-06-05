@@ -78,6 +78,7 @@ you're running it that way.
 | TAILER_LOGFILE | Path to the log file from the container's perspective. | /data/logs/latest.log | No |
 | TAILER_READDELAYMILLIS | How frequently the app checks the server log for updates. | 1000 | No |
 | APPS_DISCORD_HOOKURI | The URI path of the Discord weboook to which the app should post notifications. | n/a | Yes |
+| BOT_PLAYER_JOINED_ENABLED | Turns the player-joined bot on or off | true | No |
 | BOT_PLAYER_JOINED_AUTHOR | The author field that will appear in the notification tile displayed in Discord | Attendance Bot | No |
 | BOT_PLAYER_JOINED_TITLE |  The title message of the notification tile that will be displayed in Discord | Player joined the server! | No |
 | BOT_PLAYER_JOINED_THUMBNAILURL | The URL of the image thumbnail to embed within the notification tile displayed in Discord | https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png | No |
