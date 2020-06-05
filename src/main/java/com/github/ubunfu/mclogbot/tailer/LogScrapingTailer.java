@@ -25,6 +25,5 @@ public class LogScrapingTailer extends Tailer {
                 tailerProperties.isReadFromEnd(),
                 tailerProperties.isCloseFileBetweenChunks()
         );
-        LOGGER.debug("Constructed Tailer.");
     }
 }

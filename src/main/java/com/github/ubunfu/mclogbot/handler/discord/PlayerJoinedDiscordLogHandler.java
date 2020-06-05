@@ -10,6 +10,7 @@ import feign.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
@@ -17,10 +18,12 @@ import java.time.ZonedDateTime;
 import static java.lang.String.format;
 
 @Component
+@ConditionalOnProperty(name = "bot.player-joined.enabled", havingValue = "true")
 public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PlayerJoinedDiscordLogHandler.class);
 
+    private static final String BOT_NAME = "Player Joined Bot";
     private static final String KEY_EXPRESSION = "joined the game";
     private final PlayerJoinedBotProperties playerJoinedBotProperties;
 
@@ -46,6 +49,11 @@ public class PlayerJoinedDiscordLogHandler extends AbstractDiscordLogHandler {
                 PlayerJoinedDiscordLogHandler.class.getCanonicalName(), logMessage));
         Response response = discordClient.invokeWebhook(buildDiscordRequest(logMessage));
         LOGGER.info(format("Discord response: %s", response.status()));
+    }
+
+    @Override
+    public String getBotName() {
+        return BOT_NAME;
     }
 
     private DiscordWebhookRequest buildDiscordRequest(String logMessage) {
