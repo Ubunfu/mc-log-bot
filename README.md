@@ -73,13 +73,27 @@ any of these, either add it to the `environment` field of your Docker Compose fi
 [docker-compose.yml](docker-compose.yml), or toss in an extra `-e VAR=VALUE` param to the `docker run ...` command if 
 you're running it that way.  
 
+### General Config:
 |Parameter | Description | Default | Required? |
 |---       |---          | ---     | --- |
 | TAILER_LOGFILE | Path to the log file from the container's perspective. | /data/logs/latest.log | No |
 | TAILER_READDELAYMILLIS | How frequently the app checks the server log for updates. | 1000 | No |
 | APPS_DISCORD_HOOKURI | The URI path of the Discord weboook to which the app should post notifications. | n/a | Yes |
+
+### Player-Joined Bot Config:
+|Parameter | Description | Default | Required? |
+|---       |---          | ---     | --- |
 | BOT_PLAYER_JOINED_ENABLED | Turns the player-joined bot on or off | true | No |
 | BOT_PLAYER_JOINED_AUTHOR | The author field that will appear in the notification tile displayed in Discord | Attendance Bot | No |
 | BOT_PLAYER_JOINED_TITLE |  The title message of the notification tile that will be displayed in Discord | Player joined the server! | No |
 | BOT_PLAYER_JOINED_THUMBNAILURL | The URL of the image thumbnail to embed within the notification tile displayed in Discord | https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/pickaxe.png | No |
 | BOT_PLAYER_JOINED_COLOR | The color of the notification tile displayed in Discord. ***Represented by converting a hex color-code into decimal***. | 65280 | No |
+
+### Achievement Bot Config:
+|Parameter | Description | Default | Required? |
+|---       |---          | ---     | --- |
+| BOT_ACHIEVEMENT_ENABLED | Turns the achievement bot on or off | true | No |
+| BOT_ACHIEVEMENT_AUTHOR | The author field that will appear in the notification tile displayed in Discord | Achievement Bot | No |
+| BOT_ACHIEVEMENT_TITLE |  The title message of the notification tile that will be displayed in Discord | Somebody earned an achievement! | No |
+| BOT_ACHIEVEMENT_THUMBNAILURL | The URL of the image thumbnail to embed within the notification tile displayed in Discord | https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/trophy.png | No |
+| BOT_ACHIEVEMENT_COLOR | The color of the notification tile displayed in Discord. ***Represented by converting a hex color-code into decimal***. | 16766720 | No |
