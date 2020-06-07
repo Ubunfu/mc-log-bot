@@ -3,7 +3,6 @@ package com.github.ubunfu.mclogbot.handler.discord;
 import com.github.ubunfu.mclogbot.client.discord.DiscordClient;
 import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequest;
 import com.github.ubunfu.mclogbot.client.discord.request.DiscordWebhookRequestBuilder;
-import com.github.ubunfu.mclogbot.config.properties.AchievementBotProperties;
 import com.github.ubunfu.mclogbot.config.properties.BotProperties;
 import com.github.ubunfu.mclogbot.parser.LogParser;
 import com.github.ubunfu.mclogbot.parser.ParserResponse;
