@@ -8,16 +8,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(properties = {
-        "bot.playerJoined.enabled=true",
-        "bot.playerJoined.author=AUTHOR",
-        "bot.playerJoined.title=TITLE",
-        "bot.playerJoined.color=1",
-        "bot.playerJoined.ThumbnailUrl=THUMBNAIL_URL"
+        "bot.achievement.enabled=true",
+        "bot.achievement.author=AUTHOR",
+        "bot.achievement.title=TITLE",
+        "bot.achievement.color=1",
+        "bot.achievement.ThumbnailUrl=THUMBNAIL_URL"
 })
-public class PlayerJoinedBotPropertiesTest {
+public class AchievementBotPropertiesTest {
 
     @Autowired
-    private PlayerJoinedBotProperties properties;
+    private AchievementBotProperties properties;
 
     @Test
     void expectPropertiesParsedCorrectly() {
