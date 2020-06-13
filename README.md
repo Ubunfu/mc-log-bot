@@ -9,7 +9,9 @@ Compatible architectures:
 * linux/arm64
 
 ## What does it do?
-* Post messages to a Discord channel when players join the Minecraft server
+Post messages to a Discord channel when players:
+ * Join the Minecraft server
+ * Earn an achievement (advancement)
 
 ## How do I use it?
 You have three primary options:
