@@ -4,5 +4,4 @@
 VERSION=$(xq .project.version ../pom.xml | tr -d \")
 
 ./deploy-github-tag.sh $VERSION
-./deploy-githib-package.sh
 ./deploy-docker-image.sh $VERSION
