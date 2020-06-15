@@ -27,6 +27,8 @@ public abstract class BaseLogHandlerTest {
     protected static final String TITLE = "TITLE_001";
     protected static final long COLOR = 1;
 
+    protected ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor = ArgumentCaptor.forClass(DiscordWebhookRequest.class);
+
     @Mock
     protected BotProperties properties;
 

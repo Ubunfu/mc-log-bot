@@ -24,3 +24,8 @@ bot:
     title: "Somebody earned an achievment!"
     thumbnailUrl: "https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/trophy.png"
     color: 16766720
+  death:
+    enabled: true
+    author: "Death Bot"
+    thumbnailUrl: "https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/reaper.png"
+    color: 9109504
