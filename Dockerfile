@@ -19,6 +19,11 @@ ENV BOT_ACHIEVEMENT_TITLE Somebody earned an achievement!
 ENV BOT_ACHIEVEMENT_THUMBNAILURL https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/trophy.png
 ENV BOT_ACHIEVEMENT_COLOR 16766720
 
+ENV BOT_DEATH_ENABLED true
+ENV BOT_DEATH_AUTHOR Death Bot
+ENV BOT_DEATH_THUMBNAILURL https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/reaper.png
+ENV BOT_DEATH_COLOR 9109504
+
 RUN ["mvn", "clean", "package", "-DskipTests"]
 
 ENTRYPOINT ["mvn", "spring-boot:run"]

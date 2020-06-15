@@ -99,3 +99,12 @@ you're running it that way.
 | BOT_ACHIEVEMENT_TITLE |  The title message of the notification tile that will be displayed in Discord | Somebody earned an achievement! | No |
 | BOT_ACHIEVEMENT_THUMBNAILURL | The URL of the image thumbnail to embed within the notification tile displayed in Discord | https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/trophy.png | No |
 | BOT_ACHIEVEMENT_COLOR | The color of the notification tile displayed in Discord. ***Represented by converting a hex color-code into decimal***. | 16766720 | No |
+
+### Death Bot Config:
+|Parameter | Description | Default | Required? |
+|---       |---          | ---     | --- |
+| BOT_DEATH_ENABLED | Turns the death bot on or off | true | No |
+| BOT_DEATH_AUTHOR | The author field that will appear in the notification tile displayed in Discord | Death Bot | No |
+| BOT_DEATH_TITLE |  ***This configuration value is ignored, as Death Bot's messages are posted as the title for more immediate fun*** | n/a | No |
+| BOT_DEATH_THUMBNAILURL | The URL of the image thumbnail to embed within the notification tile displayed in Discord | https://mc-log-bot-assets.s3.us-east-2.amazonaws.com/reaper.png | No |
+| BOT_DEATH_COLOR | The color of the notification tile displayed in Discord. ***Represented by converting a hex color-code into decimal***. | 9109504 | No |

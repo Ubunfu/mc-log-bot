@@ -36,7 +36,6 @@ public class AchievementDiscordLogHandlerTest extends BaseLogHandlerTest {
     private final ParserResponse PARSER_RESPONSE = buildParserResponse();
 
     private AchievementDiscordLogHandler logHandler;
-    private ArgumentCaptor<DiscordWebhookRequest> discordReqCaptor = ArgumentCaptor.forClass(DiscordWebhookRequest.class);
 
     @BeforeEach
     void setUp() {
