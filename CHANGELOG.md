@@ -4,6 +4,8 @@ I like [semantic versioning](https://semver.org/), so this project uses it so mu
 
 ### v1.0.0
 * [feature] [Upgrading to Spring Boot 2.3.9](https://github.com/Ubunfu/mc-log-bot/pull/18)
+* [Issue #19](https://github.com/Ubunfu/mc-log-bot/issues/19) [bugfix]:
+[Fix player-join parsing for non-vanilla servers](https://github.com/Ubunfu/mc-log-bot/pull/20)
 
 ### v0.3.0
 * [Issue #9](https://github.com/Ubunfu/mc-log-bot/issues/9) [feature]:
