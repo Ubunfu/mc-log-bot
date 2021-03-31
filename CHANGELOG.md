@@ -2,9 +2,12 @@
 
 I like [semantic versioning](https://semver.org/), so this project uses it so much as I'm willing and able.
 
+### v1.0.0
+* [feature] [Upgrading to Spring Boot 2.3.9](https://github.com/Ubunfu/mc-log-bot/pull/18)
+
 ### v0.3.0
 * [Issue #9](https://github.com/Ubunfu/mc-log-bot/issues/9) [feature]:
-[Look out, here comes Death Bot](https://github.com/Ubunfu/mc-log-bot/pull/16)
+[Look out, here comes Death Bot](https://github.com/Ubunfu/mc-log-bot/pull/17)
 
 ### v0.2.1
 * [Issue #15](https://github.com/Ubunfu/mc-log-bot/issues/15) [bugfix]:
