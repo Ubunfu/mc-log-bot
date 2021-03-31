@@ -5,17 +5,20 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.2.RELEASE</version>
+		<version>2.3.9.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.ubunfu</groupId>
 	<artifactId>mc-log-bot</artifactId>
-	<version>0.3.0</version>
+	<version>1.0.0</version>
 	<name>Minecraft Server Log Bot</name>
 	<description>Scrapes logs of a Minecraft server and integrates with webhooks</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<version.commons-io>2.5</version.commons-io>
+		<version.jackson.annotations>2.11.0</version.jackson.annotations>
+		<version.jackson.databind>2.11.0</version.jackson.databind>
+		<version.spring.cloud.starter-openfeign>2.2.2.RELEASE</version.spring.cloud.starter-openfeign>
 	</properties>
 
 	<dependencies>
@@ -53,24 +56,23 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
+            <version>${version.commons-io}</version>
         </dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
-			<version>2.2.2.RELEASE</version>
+			<version>${version.spring.cloud.starter-openfeign}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.11.0</version>
+			<version>${version.jackson.annotations}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.11.0</version>
+			<version>${version.jackson.databind}</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
