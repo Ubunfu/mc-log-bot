@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "bot.player-joined.enabled", havingValue = "true")
 public class PlayerJoinedLogParser extends AbstractLogParser {
 
+    private static final String SUFFIX_JOINED_THE_GAME = "joined the game";
+    private static final String EMPTY_STRING = "";
+    private static final String SPACE = " ";
+
     @Override
     public ParserResponse parse(String logMessage) {
         fields.clear();
@@ -18,6 +22,8 @@ public class PlayerJoinedLogParser extends AbstractLogParser {
     }
 
     private String getPlayerName(String logMessage) {
-        return logMessage.split(" ")[3];
+        String logTruncated = logMessage.replace(SUFFIX_JOINED_THE_GAME, EMPTY_STRING).trim();
+        String[] logTruncatedParts = logTruncated.split(SPACE);
+        return logTruncatedParts[logTruncatedParts.length - 1];
     }
 }
