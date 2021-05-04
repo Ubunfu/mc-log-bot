@@ -4,6 +4,7 @@ I like [semantic versioning](https://semver.org/), so this project uses it so mu
 
 ### v1.0.1
 * [bugfix] [Pointing build/deploy scripts to GitHub Container Registry](https://github.com/Ubunfu/mc-log-bot/pull/24)
+* [bugfix] [Updating vulnerable dependency](https://github.com/Ubunfu/mc-log-bot/pull/22)
 
 ### v1.0.0
 * [feature] [Upgrading to Spring Boot 2.3.9](https://github.com/Ubunfu/mc-log-bot/pull/18)
