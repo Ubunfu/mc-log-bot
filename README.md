@@ -8,10 +8,11 @@ Compatible architectures:
 * linux/amd64
 * linux/arm64
 
-## What does it do?
+## What can it do?
 Post messages to a Discord channel when players:
  * Join the Minecraft server
  * Earn an achievement (advancement)
+ * Die
 
 ## How do I use it?
 You have three primary options:
@@ -24,15 +25,15 @@ Using a compose file makes it a lot easier to manage the configuration of the bo
  and allowing it to restart itself if it crashes for some reason. Use [docker-compose.yml](docker-compose.yml) as a 
  template to see how to set one up.
  
-### Pull container from Docker Hub
-1. Pull the container from Docker Hub
+### Pull container from GitHub Container Registry
+1. Pull the container from GHCR
 ```bash
-docker pull ubunfu/mc-log-bot
+docker pull ghcr.io/ubunfu/mc-log-bot/mc-log-bot
 ```
 
 2. Run it alongside your Minecraft server
 ```bash
-docker run -e APPS_DISCORD_HOOKURI=/path/of/discord/webhook -v /path/to/server/data:/data -d ubunfu/mc-log-bot
+docker run -e APPS_DISCORD_HOOKURI=/path/of/discord/webhook -v /path/to/server/data:/data -d ghcr.io/ubunfu/mc-log-bot/mc-log-bot
 ```
 
 #### Parameters
@@ -56,7 +57,7 @@ docker build -t mc-log-bot .
 
 3. Run the container alongside your minecraft server (see above for parameter descriptions)
 ```bash
-docker run -e APPS_DISCORD_HOOKURI=/path/of/discord/webhook -v /path/to/server/data:/data -d ubunfu/mc-log-bot
+docker run -e APPS_DISCORD_HOOKURI=/path/of/discord/webhook -v /path/to/server/data:/data -d mc-log-bot
 ```
 
 ## Setting up the data directory
