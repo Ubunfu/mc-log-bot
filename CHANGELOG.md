@@ -2,6 +2,9 @@
 
 I like [semantic versioning](https://semver.org/), so this project uses it so much as I'm willing and able.
 
+### v1.0.1
+* [bugfix] [Pointing build/deploy scripts to GitHub Container Registry](https://github.com/Ubunfu/mc-log-bot/pull/24)
+
 ### v1.0.0
 * [feature] [Upgrading to Spring Boot 2.3.9](https://github.com/Ubunfu/mc-log-bot/pull/18)
 * [Issue #19](https://github.com/Ubunfu/mc-log-bot/issues/19) [bugfix]:
