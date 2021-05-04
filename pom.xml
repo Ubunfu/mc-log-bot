@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.github.ubunfu</groupId>
 	<artifactId>mc-log-bot</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>Minecraft Server Log Bot</name>
 	<description>Scrapes logs of a Minecraft server and integrates with webhooks</description>
 
