@@ -17,7 +17,7 @@
 	<properties>
 		<version.commons-io>2.7</version.commons-io>
 		<version.jackson.annotations>2.11.0</version.jackson.annotations>
-		<version.jackson.databind>2.11.0</version.jackson.databind>
+		<version.jackson.databind>2.12.7.1</version.jackson.databind>
 		<version.spring.cloud.starter-openfeign>2.2.2.RELEASE</version.spring.cloud.starter-openfeign>
 	</properties>
 
